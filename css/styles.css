@@ -53,7 +53,8 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 }
 .display em { letter-spacing: -0.02em; }
 
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+:focus { outline: none; }
+:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
 
 /* ---------- Grain ---------- */
 .grain {
