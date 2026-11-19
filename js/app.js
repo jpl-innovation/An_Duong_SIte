@@ -313,6 +313,45 @@ function renderIndex(filter = 'all') {
   $$('.index-row', list).forEach(row => row.addEventListener('click', () => openModal(row.dataset.id, row)));
 }
 
+/* Photo that follows the pointer over the project list (as in the first version, without the custom cursor). */
+function initPreview() {
+  const list = $('#indexList');
+  if (!list || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  const box = document.createElement('div');
+  box.className = 'preview'; box.setAttribute('aria-hidden', 'true');
+  box.innerHTML = '<div class="preview-inner"></div>';
+  document.body.appendChild(box);
+  const inner = box.firstChild, mouse = { x: 0, y: 0 }, pos = { x: 0, y: 0 };
+  let current = null, running = false;
+  const hide = () => { box.classList.remove('show'); current = null; };
+  const loop = () => {
+    const dx = mouse.x - pos.x;
+    pos.x += dx * 0.12; pos.y += (mouse.y - pos.y) * 0.12;
+    box.style.transform = `translate(${pos.x + 30}px, ${pos.y - 200}px) rotate(${clamp(dx * 0.04, -8, 8)}deg)`;
+    running = box.classList.contains('show') || Math.abs(dx) > 0.5;
+    if (running) requestAnimationFrame(loop);
+  };
+  addEventListener('mousemove', e => {
+    mouse.x = e.clientX; mouse.y = e.clientY;
+    if (!running) { running = true; requestAnimationFrame(loop); }
+  }, { passive: true });
+  list.addEventListener('mouseover', e => {
+    const row = e.target.closest('.index-row');
+    if (!row || row.dataset.id === current) return;
+    const p = PROJECTS.find(x => x.id === row.dataset.id);
+    if (!p) return;
+    if (!box.classList.contains('show')) { pos.x = mouse.x; pos.y = mouse.y; }
+    current = row.dataset.id;
+    const img = new Image(); img.src = p.image; img.alt = '';
+    inner.appendChild(img);
+    while (inner.children.length > 3) inner.removeChild(inner.firstChild);
+    box.classList.add('show');
+  });
+  list.addEventListener('mouseleave', hide);
+  list.addEventListener('click', hide);
+  addEventListener('scroll', () => { if (current) hide(); }, { passive: true });
+}
+
 function initFilters() {
   const count = $('#countAll');
   if (count) count.textContent = projectPool().length;
@@ -482,6 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPricing();
   initForm();
   initHeader();
+  initPreview();
   initScrollFX();
   initReveal();
   initSmooth();
