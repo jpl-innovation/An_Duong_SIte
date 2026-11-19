@@ -300,7 +300,7 @@ function renderIndex(filter = 'all') {
     <li class="index-item enter" style="animation-delay:${i * 0.06}s">
       <button class="index-row" data-id="${p.id}" aria-haspopup="dialog">
         <span class="index-num">${pad2(i + 1)}</span>
-        <span class="index-title">${p.title}<span class="index-thumb" aria-hidden="true"><img src="${p.image}" alt="" loading="lazy" /></span></span>
+        <span class="index-title">${p.title}</span>
         <span class="index-cell">${p.location || p.type}</span>
         <span class="index-cell">${p.service}</span>
         <span class="index-cell">${p.type}</span>

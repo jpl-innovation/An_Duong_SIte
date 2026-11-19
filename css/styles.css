@@ -317,8 +317,9 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 .index-row {
   position: relative; width: 100%; text-align: left;
   padding: clamp(18px, 2.4vw, 32px) 0;
-  transition: color .4s, padding .6s var(--ease);
+  transition: color .5s var(--ease);
 }
+.index-row > * { transition: transform .6s var(--ease), color .5s var(--ease); }
 .index-row::before {
   content: ''; position: absolute; inset: 0; background: var(--ink);
   transform: scaleY(0); transform-origin: bottom; transition: transform .6s var(--ease); z-index: -1;
@@ -327,10 +328,13 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 .index-num { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .index-title { font-size: clamp(1.6rem, 3.6vw, 3.4rem); font-weight: 300; letter-spacing: -0.045em; line-height: 1.05; }
 .index-cell { font-size: 13px; color: var(--ink-2); }
-.index-row:hover { color: var(--bone); padding-left: 20px; padding-right: 20px; }
-.index-row:hover::before { transform: scaleY(1); }
-.index-row:hover .index-num, .index-row:hover .index-cell { color: rgba(236,233,227,.7); }
-.index-row:hover .index-title { font-family: var(--serif); font-style: italic; letter-spacing: -0.025em; }
+/* Hover only changes colour and transform, never size: a size change moved the row out from under the pointer and made it flicker. */
+.index-row:hover, .index-row:focus-visible { color: var(--bone); }
+.index-row:hover::before, .index-row:focus-visible::before { transform: scaleY(1); }
+.index-row:hover .index-num, .index-row:hover .index-cell,
+.index-row:focus-visible .index-num, .index-row:focus-visible .index-cell { color: rgba(236,233,227,.75); }
+.index-row:hover > :first-child, .index-row:hover .index-title { transform: translateX(20px); }
+.index-row:hover > span:last-child { transform: translateX(-20px); }
 .index-item.enter { animation: rowIn .8s var(--ease-out) both; }
 @keyframes rowIn { from { opacity: 0; transform: translateY(24px); } }
 
@@ -597,9 +601,6 @@ html.lenis, html.lenis body { height: auto; }
 .header-nav a[aria-current="page"]::after { transform: scaleX(1); }
 
 /* Project index: a small picture opens inside the title on hover (nothing follows the cursor) */
-.index-thumb { display: inline-block; width: 0; height: .78em; margin-left: 0; overflow: hidden; vertical-align: -0.04em; transition: width .7s var(--ease), margin .7s var(--ease); }
-.index-thumb img { width: 1.5em; height: 100%; object-fit: cover; max-width: none; }
-.index-row:hover .index-thumb, .index-row:focus-visible .index-thumb { width: 1.5em; margin-left: .3em; }
 .index-empty { padding: 32px 0; color: var(--muted); border-top: 1px solid var(--line); }
 .modal-note { font-size: 13px; color: var(--muted); margin: -24px 0 32px; }
 .modal-hero + .modal-hero { margin-top: 4px; }
@@ -693,8 +694,9 @@ html.lenis, html.lenis body { height: auto; }
 /* Thi công: the layers inside a wall */
 .layers { display: grid; grid-template-columns: 1fr 1fr; gap: var(--pad); align-items: center; }
 .layer-stack { margin-top: 32px; }
-.layer-stack li { display: flex; justify-content: space-between; gap: 16px; padding: 16px 18px; transition: padding .6s var(--ease); }
-.layer-stack li:hover { padding-left: 30px; }
+.layer-stack li { display: flex; justify-content: space-between; gap: 16px; padding: 16px 18px; }
+.layer-stack li > * { transition: transform .6s var(--ease); }
+.layer-stack li:hover > :first-child { transform: translateX(12px); }
 .layer-stack li small { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }
 .layers figure { overflow: hidden; }
 .layers figure img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
@@ -776,11 +778,14 @@ html.lenis, html.lenis body { height: auto; }
 .path {
   position: relative; display: grid; grid-template-columns: 80px 1.2fr 1fr 220px; gap: 20px; align-items: center;
   padding: clamp(22px, 3vw, 40px) 0; border-bottom: 1px solid var(--line);
-  transition: padding .6s var(--ease), color .4s;
+  transition: color .4s;
 }
+.path > * { transition: transform .6s var(--ease); }
 .path::before { content: ''; position: absolute; inset: 0; background: var(--ink); transform: scaleY(0); transform-origin: bottom; transition: transform .6s var(--ease); z-index: -1; }
 .path-list { position: relative; z-index: 1; }
-.path:hover, .path:focus-visible { color: var(--bone); padding-left: 20px; padding-right: 20px; }
+.path:hover, .path:focus-visible { color: var(--bone); }
+.path:hover > :not(.path-media), .path:focus-visible > :not(.path-media) { transform: translateX(20px); }
+.path:hover > .path-media, .path:focus-visible > .path-media { transform: translateX(-20px); }
 .path:hover::before, .path:focus-visible::before { transform: scaleY(1); }
 .path-n { font-size: 12px; color: var(--muted); }
 .path-q { font-size: clamp(1.6rem, 3.4vw, 3.2rem); font-weight: 300; letter-spacing: -0.045em; line-height: 1.05; }
@@ -818,8 +823,9 @@ html.lenis, html.lenis body { height: auto; }
 .letter-sign { display: flex; flex-direction: column; gap: 6px; margin-top: 2em; padding-top: 18px; border-top: 1px solid var(--ink); }
 .letter-sign .member-role { font-size: 11px; }
 .pillars { border-top: 1px solid var(--ink); margin-bottom: clamp(48px, 7vw, 96px); }
-.pillars li { display: grid; grid-template-columns: 80px 1fr; align-items: baseline; padding: clamp(14px, 2vw, 24px) 0; border-bottom: 1px solid var(--line); transition: padding .6s var(--ease); }
-.pillars li:hover { padding-left: 20px; }
+.pillars li { display: grid; grid-template-columns: 80px 1fr; align-items: baseline; padding: clamp(14px, 2vw, 24px) 0; border-bottom: 1px solid var(--line); }
+.pillars li > * { transition: transform .6s var(--ease); }
+.pillars li:hover > * { transform: translateX(20px); }
 .pillars span { font-size: 12px; color: var(--muted); }
 .pillars b { font-weight: 300; font-size: clamp(2.4rem, 7vw, 7rem); letter-spacing: -0.05em; line-height: 1; }
 .pillars em { letter-spacing: -0.02em; color: var(--accent); }
