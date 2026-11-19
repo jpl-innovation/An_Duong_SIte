@@ -4,33 +4,38 @@
    ========================================================== */
 
 const PROJECTS = [
-  { id: 'q7', title: 'Biệt thự Quận 7', category: 'biet-thu', svc: ['thi-cong'], type: 'Biệt thự', location: 'Quận 7, TP.HCM', service: 'Thi công xây dựng', featured: true,
-    image: 'img/bietthu-q7.jpg', gallery: ['img/port-1.jpg'],
-    text: 'Biệt thự nhiều tầng mái lệch do ADDC thi công xây dựng. Ảnh công trường ghi lại bước kiểm tra lồng thép cột và lưới thép sàn trước khi đổ bê tông.' },
-  { id: '160bloi', title: 'Nhà phố 5 tầng Bình Thạnh', category: 'nha-pho', svc: ['thi-cong'], type: 'Nhà phố', location: 'Bình Thạnh, TP.HCM', service: 'Thi công xây dựng', featured: true,
-    image: 'img/160bloi.jpg', gallery: ['img/160bloi-14.jpg', 'img/160bloi-12.jpg', 'img/160bloi-13.jpg'],
-    text: 'Nhà phố 5 tầng do ADDC làm nhà thầu thi công. Hình ảnh ghi lại các giai đoạn chống cốp pha sàn, bơm bê tông và tập kết vật tư tại công trường.' },
-  { id: 'q12', title: 'Biệt thự Quận 12', category: 'biet-thu', svc: ['thi-cong'], type: 'Biệt thự', location: 'Quận 12, TP.HCM', service: 'Thi công xây dựng', featured: true,
-    image: 'img/bietthuq12-12.jpg',
-    text: 'Biệt thự có hồ bơi, giàn pergola và mặt tiền kính mở ra sân vườn, do ADDC thi công xây dựng.' },
-  { id: 'tieccuoi', title: 'Nhà hàng tiệc cưới Hồng Ngự', category: 'khac', svc: ['thi-cong'], type: 'Nhà hàng', location: 'Hồng Ngự, Đồng Tháp', service: 'Thi công xây dựng, 2019', featured: true,
-    image: 'img/tieccuoi-1.jpg',
-    text: 'Công trình nhà hàng tiệc cưới hoàn thành năm 2019 với hành lang cột, vách kính lớn và sân trước rộng.' },
+  { id: 'q12', title: 'Biệt thự vườn Quận 12', category: 'biet-thu', svc: ['thi-cong', 'noi-that'], type: 'Biệt thự', location: 'An Phú Đông, Quận 12, TP.HCM', service: 'Thi công xây dựng', featured: true,
+    image: 'img/bietthuq12-12.jpg', gallery: ['img/projects/bietthuq12-11.jpg', 'img/projects/bietthuq12-10.jpg', 'img/projects/bietthuq12-9.jpg', 'img/projects/bietthuq12-8.jpg', 'img/projects/bietthuq12-4.jpg', 'img/projects/bietthuq12-7.jpg', 'img/projects/bietthuq12-5.jpg', 'img/projects/bietthuq12-6.jpg'],
+    facts: [['Thiết kế', 'AN Design + Build'], ['Thi công', 'Kiến Trúc An Dương'], ['Quy mô', '1.000 m² xây dựng, 2 tầng, mái BTCT'], ['Thời gian', '05/2019 đến 11/2019']],
+    text: 'Villa A, biệt thự vườn hai tầng với hồ bơi, giàn pergola và mặt kính lớn mở ra sân vườn. Hình ảnh ghi lại từ lúc đổ móng, dựng mái đến khi hoàn thiện nội thất phòng ngủ và phòng tắm.' },
+  { id: 'travinh', title: 'Trà Vinh Casa', category: 'biet-thu', svc: ['kien-truc', 'thi-cong'], type: 'Biệt thự', location: 'Phường 1, TP. Trà Vinh', service: 'Thiết kế, xây dựng trọn gói', featured: true,
+    image: 'img/projects/travinh1.jpg', gallery: ['img/projects/travinh.jpg', 'img/projects/travinh2.jpg', 'img/projects/travinh3.jpg'],
+    facts: [['Thiết kế', 'ThS. KTS. Nguyễn Vương Hồng'], ['Thi công', 'Kiến Trúc An Dương'], ['Quy mô', '1.200 m² xây dựng, 6 tầng, mái BTCT lợp ngói'], ['Thời gian', '05/2021 đến 11/2021']],
+    text: 'Công trình thiết kế và xây dựng trọn gói. Hình ảnh công trường: tập kết cọc bê tông ly tâm, ép cọc, lắp thép sàn và bơm bê tông từng tầng.' },
+  { id: '160bloi', title: 'Nhà phố thương mại 5 tầng Bình Thạnh', category: 'nha-pho', svc: ['kien-truc', 'thi-cong'], type: 'Nhà phố', location: 'Bình Thạnh, TP.HCM', service: 'Thiết kế và thi công', featured: true,
+    image: 'img/160bloi.jpg', gallery: ['img/160bloi-14.jpg', 'img/projects/160bloi-5.jpg', 'img/projects/160bloi-6.jpg', 'img/projects/160bloi-7.jpg', 'img/projects/160bloi-11.jpg', 'img/projects/160bloi-9.jpg', 'img/projects/160bloi-8.jpg', 'img/160bloi-12.jpg', 'img/projects/160bloi-10.jpg', 'img/160bloi-13.jpg'],
+    text: 'Thiết kế và thi công nhà phố thương mại 5 tầng có tầng hầm. Hình ảnh theo từng giai đoạn: cừ vây và đào đất hố móng, dựng cột, chống cốp pha, lắp thép sàn, bơm bê tông.' },
+  { id: 'q7', title: 'Biệt thự 4 tầng Quận 7', category: 'biet-thu', svc: ['thi-cong', 'noi-that'], type: 'Biệt thự', location: 'Quận 7, TP.HCM', service: 'Thi công xây dựng, nội thất', featured: true,
+    image: 'img/bietthu-q7.jpg', gallery: ['img/projects/bietthu-q7-4.jpg', 'img/projects/bietthu-q7-5.jpg', 'img/projects/bietthu-q7-6.jpg', 'img/projects/bietthu-q7-7.jpg', 'img/port-1.jpg'],
+    text: 'Biệt thự 4 tầng mái lệch. Phần hoàn thiện nội thất gồm phòng thay đồ, hệ tủ áo âm tường, bàn trang điểm và tủ kệ sơn trắng làm theo kích thước từng phòng.' },
+  { id: 'tieccuoi', title: 'Cụm nhà hàng tiệc cưới Hồng Ngự', category: 'khac', svc: ['thi-cong'], type: 'Nhà hàng', location: 'Hồng Ngự, Đồng Tháp', service: 'Thi công xây dựng', featured: true,
+    image: 'img/tieccuoi-1.jpg', gallery: ['img/projects/tieccuoi-9.jpg', 'img/projects/tieccuoi-8.jpg', 'img/projects/tieccuoi-3.jpg', 'img/projects/tieccuoi-6.jpg'],
+    facts: [['Hoàn thành', '2019']],
+    text: 'Cụm nhà hàng tiệc cưới khung thép nhịp lớn, hành lang cột và vách kính, hoàn thành năm 2019.' },
+  { id: 'tanphu', title: 'Nhà phố thương mại 4 tầng Tân Phú', category: 'nha-pho', svc: ['kien-truc', 'thi-cong'], type: 'Nhà phố', location: 'Tân Phú, TP.HCM', service: 'Thiết kế, xây dựng trọn gói',
+    image: 'img/tanphu.jpg', gallery: ['img/projects/tanphu4.jpg', 'img/projects/tanphu5.jpg', 'img/projects/tanphu6.jpg'],
+    text: 'Thiết kế và xây dựng trọn gói nhà phố thương mại 4 tầng. Hình ảnh công trường từ giải phóng mặt bằng, đào đất, ép cọc đến lắp thép sàn.' },
   { id: 'vungtau', title: 'Biệt thự Vũng Tàu', category: 'biet-thu', svc: ['kien-truc'], type: 'Biệt thự', location: 'Vũng Tàu', service: 'Thiết kế kiến trúc',
-    image: 'img/thietke-vungtau1.jpg',
-    text: 'Phương án cải tạo một biệt thự phố: mái dốc, sân trong và hồ nước, khai thác gió và ánh sáng tự nhiên.' },
-  { id: 'steam', title: 'Trung tâm STEAM', category: 'noi-that', svc: ['kien-truc', 'noi-that'], type: 'Giáo dục', location: '', service: 'Thiết kế kiến trúc, nội thất',
-    image: 'img/steam.jpg',
-    text: 'Thiết kế kiến trúc và nội thất cho một trung tâm giáo dục STEAM: không gian học mở, quầy tiếp đón, phòng thí nghiệm vách kính và mặt tiền cong.' },
-  { id: 'tanphu', title: 'Nhà phố 4 tầng Tân Phú', category: 'nha-pho', svc: ['thi-cong'], type: 'Nhà phố', location: 'Tân Phú, TP.HCM', service: 'Thi công xây dựng',
-    image: 'img/tanphu.jpg',
-    text: 'Nhà phố 4 tầng do ADDC thi công. Ảnh công trường: thi công lưới thép sàn tầng trệt trước khi đổ bê tông.' },
+    image: 'img/thietke-vungtau1.jpg', gallery: [{ src: 'img/projects/thietke-vungtau4.jpg', fit: 'contain' }, { src: 'img/projects/thietke-vungtau5.jpg', fit: 'contain' }],
+    facts: [['Thiết kế', 'ThS. KTS. Nguyễn Vương Hồng']],
+    text: 'Phương án biệt thự mái dốc với sân trong và hồ nước, khai thác gió và ánh sáng tự nhiên. Kèm theo mặt bằng bố trí công năng các tầng.' },
   { id: 'bienhoa', title: 'Biệt thự Biên Hòa', category: 'biet-thu', svc: ['kien-truc'], type: 'Biệt thự', location: 'Biên Hòa, Đồng Nai', service: 'Thiết kế kiến trúc',
-    image: 'img/nguyenvuonghong10.jpg',
-    text: 'Phác thảo phối cảnh mặt tiền, bước khởi đầu của phương án kiến trúc biệt thự.' },
-  { id: 'travinh', title: 'Trà Vinh Casa', category: 'biet-thu', svc: ['kien-truc'], type: 'Biệt thự', location: 'Trà Vinh', service: 'Thiết kế', stock: true,
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=85',
-    text: 'Dự án trong danh mục của ADDC. Hình ảnh hiện tại là ảnh minh họa và sẽ được thay bằng ảnh thực tế của công trình.' }
+    image: 'img/nguyenvuonghong10.jpg', gallery: [{ src: 'img/projects/nguyenvuonghong6.jpg', fit: 'contain' }, { src: 'img/projects/nguyenvuonghong13.jpg', fit: 'contain' }, { src: 'img/projects/nguyenvuonghong14.jpg', fit: 'contain' }],
+    facts: [['Thiết kế', 'ThS. KTS. Nguyễn Vương Hồng']],
+    text: 'Từ phác thảo phối cảnh mặt tiền đến mặt bằng tầng 1 và tầng 2 có kích thước, bước khởi đầu của bộ hồ sơ kiến trúc.' },
+  { id: 'steam', title: 'Trung tâm STEAM', category: 'noi-that', svc: ['kien-truc', 'noi-that'], type: 'Giáo dục', location: '', service: 'Thiết kế kiến trúc, nội thất',
+    image: 'img/steam.jpg', gallery: [{ src: 'img/projects/steam2.jpg', fit: 'contain' }, { src: 'img/projects/steam3.jpg', fit: 'contain' }, { src: 'img/projects/steam4.jpg', fit: 'contain' }, { src: 'img/projects/steam5.jpg', fit: 'contain' }],
+    text: 'Thiết kế kiến trúc và nội thất cho trung tâm giáo dục STEAM: mô hình 3D bố trí lớp học, khu tiếp đón, phòng thí nghiệm vách kính và mặt tiền cong.' }
 ];
 
 /* Bảng giá addc.vn (2021), chưa gồm VAT 10%. */
@@ -263,10 +268,16 @@ function countUp(el) {
 /* Extra gallery pictures per service page (real site photos and credited material photos). */
 const GALLERY_EXTRA = {
   'thi-cong': [
+    { image: 'img/equipment/ep-coc.jpg', title: 'Giàn ép cọc 80 đến 120 tấn', location: 'Thiết bị ADDC', service: 'Phần ngầm' },
+    { image: 'img/equipment/cu-vay.jpg', title: 'Cừ vây thi công tầng hầm', location: 'Thiết bị ADDC', service: 'Phần ngầm' },
     { image: 'img/phunhuan1.jpg', title: 'Ép cọc móng', location: 'Công trường ADDC', service: 'Phần ngầm' },
     { image: 'img/160bloi-14.jpg', title: 'Biển nhà thầu ADDC', location: 'Bình Thạnh, TP.HCM', service: 'Thi công phần thô' }
   ],
   'noi-that': [
+    { image: 'img/projects/bietthu-q7-5.jpg', title: 'Phòng thay đồ', location: 'Biệt thự Quận 7', service: 'Tủ áo, bàn trang điểm' },
+    { image: 'img/projects/bietthu-q7-7.jpg', title: 'Tủ âm tường', location: 'Biệt thự Quận 7', service: 'Đồ gỗ theo kích thước' },
+    { image: 'img/projects/bietthuq12-10.jpg', title: 'Phòng ngủ', location: 'Biệt thự vườn Quận 12', service: 'Hoàn thiện nội thất' },
+    { image: 'img/projects/bietthuq12-9.jpg', title: 'Phòng tắm', location: 'Biệt thự vườn Quận 12', service: 'Đá, gạch bông gió, đèn' },
     { image: 'img/materials/go.webp', title: 'Gỗ tự nhiên', location: 'Sàn, tủ, ốp tường', service: 'Vật liệu nội thất' },
     { image: 'img/materials/da-marble.jpg', title: 'Đá marble', location: 'Mặt bếp, sảnh, lavabo', service: 'Vật liệu nội thất' },
     { image: 'img/materials/may-tre.jpg', title: 'Mây tre đan', location: 'Điểm nhấn, đèn, vách', service: 'Vật liệu nội thất' },
@@ -384,9 +395,10 @@ function openModal(id, trigger) {
   const p = PROJECTS.find(x => x.id === id);
   if (!p) return;
   lastFocus = trigger || null;
-  const imgs = [p.image, ...(p.gallery || [])];
+  const more = (p.gallery || []).map(g => typeof g === 'string' ? { src: g } : g);
   $('#modalBody').innerHTML = `
-    ${imgs.map((src, i) => `<img class="modal-hero" src="${src}" alt="${p.title}, ảnh ${i + 1}" ${i ? 'loading="lazy"' : ''} />`).join('')}
+    <img class="modal-hero" src="${p.image}" alt="${p.title}" />
+    ${more.length ? `<div class="modal-grid">${more.map((g, i) => `<img class="${g.fit === 'contain' ? 'is-drawing' : ''}" src="${g.src}" alt="${p.title}, ảnh ${i + 2}" loading="lazy" />`).join('')}</div>` : ''}
     <div class="modal-content">
       <span class="label">${p.type} · ADDC</span>
       <h3 class="modal-title">${p.title}</h3>
@@ -394,7 +406,7 @@ function openModal(id, trigger) {
         ${p.location ? `<div><dt>Địa điểm</dt><dd>${p.location}</dd></div>` : ''}
         <div><dt>Loại hình</dt><dd>${p.type}</dd></div>
         <div><dt>Hạng mục</dt><dd>${p.service}</dd></div>
-        <div><dt>Đơn vị thực hiện</dt><dd>Kiến Trúc An Dương</dd></div>
+        ${(p.facts || [['Đơn vị thực hiện', 'Kiến Trúc An Dương']]).map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}
       </dl>
       <p class="modal-text">${p.text}</p>
       ${p.stock ? '<p class="modal-note">Ảnh minh họa, chưa phải ảnh thực tế của công trình.</p>' : ''}

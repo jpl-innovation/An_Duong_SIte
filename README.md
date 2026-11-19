@@ -13,6 +13,9 @@ css/styles.css        Giao diện
 js/app.js             Dữ liệu dự án, bảng giá 2021, dự toán, menu, chuyển động
 js/scene3d.js         Mô hình 3D (Three.js); khối MODELS ở đầu tệp để gắn mô hình GLB thật
 img/                  Logo (đổi màu theo bảng màu web), ảnh công trình và đội ngũ từ addc.vn
+img/projects/         Ảnh từng dự án từ addc.vn
+img/equipment/        Ảnh thiết bị cắt từ Hồ sơ năng lực ADDC
+img/partners/         Logo đối tác từ addc.vn
 img/materials/        Ảnh vật liệu từ thư viện mở, nguồn trong CREDITS.md
 models/               Mô hình GLB dựng sẵn và ảnh tham chiếu, đầu vào cho raea
 docs/3D-PROMPTS.md    Lời nhắc cho raea và cách gắn mô hình mới vào web
@@ -21,4 +24,4 @@ tools/export-3d.html  Xuất lại các mô hình GLB sau khi sửa js/scene3d.j
 
 Sau khi sửa CSS hoặc JS, tăng số `?v=` trong các thẻ `<link>` và `<script>` của 5 trang để trình duyệt tải bản mới.
 
-Cần xác nhận trước khi đưa lên mạng: bảng giá là bản 2021; form liên hệ mở ứng dụng email (chưa có máy chủ nhận form); ảnh dự án Trà Vinh Casa là ảnh minh họa; 4 thành viên chưa có ảnh trên addc.vn đang hiển thị chữ viết tắt.
+Cần xác nhận trước khi đưa lên mạng: bảng giá là bản 2021; form liên hệ mở ứng dụng email (chưa có máy chủ nhận form); 6 thành viên chưa có ảnh chân dung đang hiển thị chữ viết tắt. Nội dung dự án, đội ngũ, sơ đồ tổ chức, thiết bị và đối tác lấy từ addc.vn và Hồ sơ năng lực ADDC.
