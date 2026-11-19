@@ -846,3 +846,7 @@ html.lenis, html.lenis body { height: auto; }
 .preview-inner { position: relative; width: 100%; height: 100%; background: var(--ink); }
 .preview-inner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); transition: transform .8s var(--ease-out); }
 .preview.show .preview-inner img { transform: scale(1); }
+
+/* Windows ClearType tints letter edges blue and orange. Giving the page content its own
+   transparent compositing layer makes Chromium smooth text in neutral grey instead. */
+main, .footer { will-change: transform; }
