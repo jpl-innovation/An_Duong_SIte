@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xuất mô hình 3D</title>
+  <meta name="robots" content="noindex" />
+  <style>body{font:16px/1.5 system-ui;background:#F2EDDD;color:#161512;padding:32px}button{font:inherit;padding:12px 18px;background:#161512;color:#F2EDDD;border:0;cursor:pointer}li{margin:4px 0}</style>
+  <script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  } }
+  </script>
+</head>
+<body>
+  <!-- Internal tool, not linked from the site: downloads the procedural models as GLB, the starting point for the 3D tool. -->
+  <h1>Xuất mô hình 3D dựng sẵn (GLB)</h1>
+  <p>Tải từng mô hình về máy, rồi đưa vào công cụ 3D cùng lời nhắc trong 3D-PROMPTS.md.</p>
+  <button type="button" id="go">Tải tất cả mô hình</button>
+  <ul id="out"></ul>
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+    import { makeMats, SAMPLES, buildHouse, applyParts, buildRoom } from '../js/scene3d.js';
+
+    const exporter = new GLTFExporter();
+    const toGLB = obj => exporter.parseAsync(obj, { binary: true, onlyVisible: true });
+
+    async function build() {
+      const M = makeMats();
+      const files = {};
+      for (const id of Object.keys(SAMPLES)) files[id] = await toGLB(SAMPLES[id](M));
+      for (let i = 0; i < 7; i++) {
+        const h = buildHouse(M);
+        applyParts(h.parts, i + 1);
+        files[`phase-${i}`] = await toGLB(h.group);
+      }
+      const full = buildHouse(M); applyParts(full.parts, 7);
+      files.house = await toGLB(full.group);
+      const room = buildRoom(M);
+      room.floor.material = room.floor.material.clone(); room.floor.material.name = 'Floor';
+      const wall = room.walls[0].material.clone(); wall.name = 'Wall';
+      room.walls.forEach(w => { w.material = wall; });
+      room.slats.visible = false;
+      files.room = await toGLB(room.group);
+      return files;
+    }
+
+    // Used by the automated export script.
+    window.exportAll = async () => {
+      const files = await build();
+      const out = {};
+      for (const [k, buf] of Object.entries(files)) {
+        let s = ''; const b = new Uint8Array(buf);
+        for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000));
+        out[k] = btoa(s);
+      }
+      return out;
+    };
+
+    document.getElementById('go').addEventListener('click', async () => {
+      const files = await build();
+      const ul = document.getElementById('out');
+      for (const [k, buf] of Object.entries(files)) {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([buf], { type: 'model/gltf-binary' }));
+        a.download = `${k}.glb`; a.textContent = `${k}.glb (${Math.round(buf.byteLength / 1024)} KB)`;
+        const li = document.createElement('li'); li.append(a); ul.append(li);
+        a.click();
+      }
+    });
+  </script>
+</body>
+</html>
