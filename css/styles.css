@@ -312,18 +312,20 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
   padding-bottom: 14px;
 }
 .index-head span:last-child, .index-row > span:last-child { text-align: right; }
-.index-item { border-top: 1px solid var(--line); }
-.index-item:last-child { border-bottom: 1px solid var(--line); }
 .index-row {
-  position: relative; width: 100%; text-align: left;
+  position: relative; width: 100%; text-align: left; border-top: 1px solid var(--line);
   padding: clamp(18px, 2.4vw, 32px) 0;
   transition: color .5s var(--ease);
 }
 .index-row > * { transition: transform .6s var(--ease), color .5s var(--ease); }
+.index-item:last-child .index-row { border-bottom: 1px solid var(--line); }
 .index-row::before {
-  content: ''; position: absolute; inset: 0; background: var(--ink);
-  transform: scaleY(0); transform-origin: bottom; transition: transform .6s var(--ease); z-index: -1;
+  content: ''; position: absolute; inset: -1px 0; background: var(--ink);
+  transform: scaleY(0); transform-origin: bottom; transition: transform .35s var(--ease); z-index: -1;
 }
+.index-row:hover::before { transition-duration: .6s; }
+/* While the page scrolls, rows passing under a resting pointer must not flash. */
+.is-scrolling .index-row, .is-scrolling .path, .is-scrolling .pillars li, .is-scrolling .layer-stack li { pointer-events: none; }
 .index-list { position: relative; z-index: 1; }
 .index-num { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .index-title { font-size: clamp(1.6rem, 3.6vw, 3.4rem); font-weight: 300; letter-spacing: -0.045em; line-height: 1.05; }

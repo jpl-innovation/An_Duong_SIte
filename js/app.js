@@ -108,8 +108,12 @@ function runClock() {
 /* ---------- Header + menu ---------- */
 function initHeader() {
   const header = $('#header');
-  let lastY = 0;
+  const root = document.documentElement;
+  let lastY = 0, scrollEnd;
   addEventListener('scroll', () => {
+    root.classList.add('is-scrolling');
+    clearTimeout(scrollEnd);
+    scrollEnd = setTimeout(() => root.classList.remove('is-scrolling'), 160);
     const y = scrollY;
     const menuOpen = document.body.classList.contains('menu-open');
     header.classList.toggle('hide', !menuOpen && y > lastY && y > 200);
