@@ -109,11 +109,19 @@ function runClock() {
 function initHeader() {
   const header = $('#header');
   const root = document.documentElement;
-  let lastY = 0, scrollEnd;
+  let lastY = 0, scrollEnd, lastMove = 0;
+  // Rows ignore a resting pointer while the page scrolls under it, but a moving mouse always gets hover at once.
+  addEventListener('mousemove', e => {
+    if (!e.movementX && !e.movementY) return;
+    lastMove = performance.now();
+    root.classList.remove('is-scrolling');
+  }, { passive: true });
   addEventListener('scroll', () => {
-    root.classList.add('is-scrolling');
-    clearTimeout(scrollEnd);
-    scrollEnd = setTimeout(() => root.classList.remove('is-scrolling'), 160);
+    if (performance.now() - lastMove > 150) {
+      root.classList.add('is-scrolling');
+      clearTimeout(scrollEnd);
+      scrollEnd = setTimeout(() => root.classList.remove('is-scrolling'), 120);
+    }
     const y = scrollY;
     const menuOpen = document.body.classList.contains('menu-open');
     header.classList.toggle('hide', !menuOpen && y > lastY && y > 200);
@@ -349,7 +357,10 @@ function initPreview() {
   });
   list.addEventListener('mouseleave', hide);
   list.addEventListener('click', hide);
-  addEventListener('scroll', () => { if (current) hide(); }, { passive: true });
+  addEventListener('scroll', () => { if (current && document.documentElement.classList.contains('is-scrolling')) hide(); }, { passive: true });
+  // Load every photo ahead of time so the first hover shows it at once.
+  const preload = () => PROJECTS.forEach(p => { const i = new Image(); i.src = p.image; });
+  'requestIdleCallback' in window ? requestIdleCallback(preload, { timeout: 2500 }) : setTimeout(preload, 1500);
 }
 
 function initFilters() {

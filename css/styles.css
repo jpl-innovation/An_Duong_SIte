@@ -315,15 +315,15 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 .index-row {
   position: relative; width: 100%; text-align: left; border-top: 1px solid var(--line);
   padding: clamp(18px, 2.4vw, 32px) 0;
-  transition: color .5s var(--ease);
+  transition: color .3s;
 }
-.index-row > * { transition: transform .6s var(--ease), color .5s var(--ease); }
+.index-row > * { transition: transform .45s var(--ease-out), color .3s; }
 .index-item:last-child .index-row { border-bottom: 1px solid var(--line); }
 .index-row::before {
   content: ''; position: absolute; inset: -1px 0; background: var(--ink);
   transform: scaleY(0); transform-origin: bottom; transition: transform .35s var(--ease); z-index: -1;
 }
-.index-row:hover::before { transition-duration: .6s; }
+.index-row:hover::before { transition-duration: .45s; }
 /* While the page scrolls, rows passing under a resting pointer must not flash. */
 .is-scrolling .index-row, .is-scrolling .path, .is-scrolling .pillars li, .is-scrolling .layer-stack li { pointer-events: none; }
 .index-list { position: relative; z-index: 1; }
@@ -839,9 +839,9 @@ html.lenis, html.lenis body { height: auto; }
 .preview {
   position: fixed; top: 0; left: 0; z-index: 40; width: 340px; aspect-ratio: 4 / 5;
   pointer-events: none; overflow: hidden; clip-path: inset(50% 50% 50% 50%);
-  transition: clip-path .6s var(--ease); will-change: transform;
+  transition: clip-path .45s var(--ease-out); will-change: transform;
 }
 .preview.show { clip-path: inset(0 0 0 0); }
 .preview-inner { position: relative; width: 100%; height: 100%; background: var(--ink); }
-.preview-inner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); transition: transform 1s var(--ease-out); }
+.preview-inner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); transition: transform .8s var(--ease-out); }
 .preview.show .preview-inner img { transform: scale(1); }
