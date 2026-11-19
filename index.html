@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=20261119l" />
+  <link rel="stylesheet" href="css/styles.css?v=20261119q" />
   <script>document.documentElement.classList.add('js');</script>
   <script type="importmap">
   { "imports": {
@@ -463,13 +463,16 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-  <script defer src="js/app.js?v=20261119l"></script>
+  <script defer src="js/app.js?v=20261119q"></script>
   <script type="module">
-    import('./js/scene3d.js?v=20261119l').catch(() => document.querySelectorAll('[data-3d]').forEach(s => {
+    const load3d = () => import('./js/scene3d.js?v=20261119q').catch(() => document.querySelectorAll('[data-3d]').forEach(s => {
       s.classList.add('failed');
       const t = s.querySelector('.stage-status');
       if (t) t.textContent = 'Không tải được mô hình 3D. Vui lòng kiểm tra kết nối mạng và tải lại trang.';
     }));
+      const near = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { near.disconnect(); load3d(); } }, { rootMargin: '1200px 0px' });
+    const watch = () => document.querySelectorAll('[data-3d]').forEach(el => near.observe(el));
+    document.getElementById('loader') ? document.addEventListener('addc:loaded', watch, { once: true }) : watch();
   </script>
 </body>
 </html>

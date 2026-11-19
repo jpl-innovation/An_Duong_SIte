@@ -205,7 +205,7 @@ function makeStage(el, { paper = false, cam = [4, 3, 5], target = [0, .8, 0], or
     fail(el, 'Trình duyệt hoặc thiết bị này không hỗ trợ WebGL nên không hiển thị được mô hình 3D.');
     return null;
   }
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = exposure;
@@ -267,6 +267,13 @@ function makeStage(el, { paper = false, cam = [4, 3, 5], target = [0, .8, 0], or
     if (e.isIntersecting) { clock.getDelta(); renderer.setAnimationLoop(tick); }
     else renderer.setAnimationLoop(null);
   }, { rootMargin: '120px' }).observe(el);
+
+  // Compile shaders and upload textures before the stage is seen, so its first visible frame is cheap.
+  setTimeout(() => {
+    const warm = () => renderer.render(scene, camera);
+    (renderer.compileAsync ? renderer.compileAsync(scene, camera) : Promise.resolve())
+      .then(() => ('requestIdleCallback' in window ? requestIdleCallback(warm) : warm())).catch(() => {});
+  }, 300);
 
   return { renderer, scene, camera, controls, sun, hemi, catcher, ticks, ready: () => el.classList.add('ready') };
 }
@@ -1084,7 +1091,26 @@ export { makeMats, SAMPLES, buildHouse, applyParts, buildRoom, fitTo };
 
 /* ---------- Boot ---------- */
 const boot = { materials: initMaterials, furniture: initFurniture, details: initDetails, build: initBuild, blueprint: initBlueprint, room: initRoom };
-document.querySelectorAll('[data-3d]').forEach(el => {
+// Each stage is built only when it comes near the screen, so shader compiling never lands on a frame the visitor is watching.
+const built = new Set();
+const build = el => {
+  if (built.has(el)) return;
+  built.add(el); lazy.unobserve(el);
   const f = boot[el.dataset['3d']];
-  if (f) f(el).catch(e => { console.error(e); fail(el, 'Không dựng được mô hình 3D trên thiết bị này.'); });
-});
+  if (f) f(el).catch(err => { console.error(err); fail(el, 'Không dựng được mô hình 3D trên thiết bị này.'); });
+};
+const lazy = new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting && build(e.target)), { rootMargin: '800px 0px' });
+const stages = [...document.querySelectorAll('[data-3d]')];
+stages.forEach(el => lazy.observe(el));
+// Pages without the intro screen build every stage at once, while the visitor is still on the first screen.
+if (!document.getElementById('loader')) stages.forEach(build);
+// Stages further down are built ahead of time, but only in a truly idle moment (no scrolling or animation running).
+if ('requestIdleCallback' in window) {
+  const next = () => requestIdleCallback(d => {
+    const el = stages.find(x => !built.has(x));
+    if (!el) return;
+    if (d.timeRemaining() > 40) build(el);
+    next();
+  }, { timeout: 0 });
+  setTimeout(next, 1500);
+}

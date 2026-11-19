@@ -78,21 +78,24 @@ function runLoader() {
   const countEl = $('#loaderCount'), bar = $('#loaderBar');
   document.body.classList.add('locked');
   const duration = reduced ? 200 : 1600;
-  const start = performance.now();
+  let start = 0;
   const step = now => {
+    start = start || now;
     const t = clamp((now - start) / duration, 0, 1);
     const v = Math.round((1 - Math.pow(1 - t, 3)) * 100);
     countEl.textContent = v;
-    bar.style.width = v + '%';
+    bar.style.transform = `scaleX(${v / 100})`;
     if (t < 1) requestAnimationFrame(step);
     else setTimeout(() => {
       loader.classList.add('done');
       document.documentElement.classList.add('loaded');
       document.body.classList.remove('locked');
-      setTimeout(() => loader.remove(), 1200);
+      setTimeout(() => { loader.remove(); document.dispatchEvent(new Event('addc:loaded')); }, 1200);
     }, 150);
   };
-  requestAnimationFrame(step);
+  // Start counting once the web fonts are in (each late font re-lays out the whole page), but never wait more than 1.2 s.
+  const go = () => requestAnimationFrame(() => requestAnimationFrame(step));
+  Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(r => setTimeout(r, 1200))]).then(go);
 }
 
 /* ---------- Clock ---------- */
@@ -165,27 +168,30 @@ function initScrollFX() {
   addEventListener('resize', sizeH);
   addEventListener('load', sizeH);
 
+  const slideCount = track ? $$('.slide', track).length : 0;
+  let lit = -1;
+  // All layout reads happen first, then all writes, so a scroll frame never forces a second layout.
   const update = () => {
     const vh = innerHeight;
-    if (heroMedia) {
-      const r = heroMedia.getBoundingClientRect();
+    const r = heroMedia && heroMedia.getBoundingClientRect();
+    const mr = manifesto && manifesto.getBoundingClientRect();
+    const hr = hs && innerWidth > 720 && hs.getBoundingClientRect();
+    const hsH = hr && hs.offsetHeight, dist = hr && track.scrollWidth - innerWidth;
+    if (r) {
       const p = clamp(1 - r.top / vh, 0, 1.6);
       heroMedia.style.setProperty('--clip', (6 * (1 - clamp(p, 0, 1))).toFixed(2) + '%');
       heroMedia.style.setProperty('--py', (-p * 8).toFixed(2) + '%');
       heroMedia.style.setProperty('--sc', (1.1 - clamp(p, 0, 1) * 0.1).toFixed(3));
     }
-    if (manifesto) {
-      const mr = manifesto.getBoundingClientRect();
-      const lit = Math.floor(clamp((vh * 0.85 - mr.top) / (mr.height + vh * 0.3), 0, 1) * words.length);
-      words.forEach((w, i) => w.classList.toggle('on', i < lit));
+    if (mr) {
+      const n = Math.floor(clamp((vh * 0.85 - mr.top) / (mr.height + vh * 0.3), 0, 1) * words.length);
+      if (n !== lit) { lit = n; words.forEach((w, i) => w.classList.toggle('on', i < n)); }
     }
-    if (hs && innerWidth > 720) {
-      const hr = hs.getBoundingClientRect();
-      const dist = track.scrollWidth - innerWidth;
-      const hp = clamp(-hr.top / (hs.offsetHeight - vh), 0, 1);
+    if (hr) {
+      const hp = clamp(-hr.top / (hsH - vh), 0, 1);
       track.style.transform = `translate3d(${-hp * dist}px,0,0)`;
-      const slides = $$('.slide', track).length;
-      hProg.textContent = pad2(clamp(Math.round(hp * (slides - 1)) + 1, 1, slides));
+      const t = pad2(clamp(Math.round(hp * (slideCount - 1)) + 1, 1, slideCount));
+      if (hProg.textContent !== t) hProg.textContent = t;
     }
   };
   let ticking = false;
