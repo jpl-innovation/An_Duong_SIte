@@ -123,6 +123,53 @@ const T = {
     for (let i = 0; i < 70; i++) { g.globalAlpha = .12; g.fillStyle = pick(['#8f8a7f', '#cfcac0', '#a39e93']); g.beginPath(); g.arc(rnd() * w, rnd() * h, 20 + rnd() * 60, 0, 7); g.fill(); }
     g.filter = 'none'; g.globalAlpha = 1;
     speckle(g, w, h, 6000, ['#8f8a7f', '#cfcac0'], 1, 2, .08, .25);
+  }),
+  // Terrazzo: cement ground with marble and glass chips (as in the Sunwah Pearl and Pham Van Bach projects).
+  terrazzo: () => tex(512, 512, (g, w, h) => {
+    g.fillStyle = '#e4ded2'; g.fillRect(0, 0, w, h);
+    speckle(g, w, h, 6000, ['#d6cfc1', '#efeae1'], 1, 2, .2, .5);
+    for (let i = 0; i < 900; i++) {
+      g.fillStyle = pick(['#b9b1a3', '#8c8478', '#d9cdb8', '#6f7d72', '#c49a7a', '#f4f1ea']);
+      g.globalAlpha = .65 + rnd() * .35;
+      const x = rnd() * w, y = rnd() * h, r = 1.5 + rnd() * 6;
+      g.beginPath(); g.moveTo(x + r, y);
+      for (let k = 1; k < 6; k++) { const a = k / 6 * Math.PI * 2 + rnd() * .5; g.lineTo(x + Math.cos(a) * r * (.6 + rnd() * .6), y + Math.sin(a) * r * (.6 + rnd() * .6)); }
+      g.closePath(); g.fill();
+    }
+    g.globalAlpha = 1;
+  }),
+  // Encaustic cement tile (gạch bông), 20 x 20 cm, as in Villa Ho Tram.
+  encaustic: () => tex(256, 256, (g, w, h) => {
+    g.fillStyle = '#e8e0cf'; g.fillRect(0, 0, w, h);
+    const c = w / 2;
+    g.fillStyle = '#3f5f55';
+    for (let k = 0; k < 4; k++) { g.save(); g.translate(c, c); g.rotate(k * Math.PI / 2); g.beginPath(); g.moveTo(0, 0); g.quadraticCurveTo(40, -70, 0, -118); g.quadraticCurveTo(-40, -70, 0, 0); g.fill(); g.restore(); }
+    g.fillStyle = '#c0663e'; g.beginPath(); g.arc(c, c, 22, 0, 7); g.fill();
+    g.fillStyle = '#d9a441';
+    [[0, 0], [w, 0], [0, h], [w, h]].forEach(([x, y]) => { g.beginPath(); g.arc(x, y, 38, 0, 7); g.fill(); });
+    g.strokeStyle = '#3f5f55'; g.lineWidth = 4; g.strokeRect(2, 2, w - 4, h - 4);
+    speckle(g, w, h, 1500, ['rgba(0,0,0,.25)'], 1, 2, .05, .12);
+  }),
+  // Site board on the hoarding: white logo panel and blue information panel.
+  siteBoard: () => tex(1024, 256, (g, w, h) => {
+    g.fillStyle = '#f4f4f1'; g.fillRect(0, 0, w * .48, h);
+    g.fillStyle = '#1f4fa3'; g.fillRect(w * .48, 0, w * .52, h);
+    g.fillRect(40, 70, 70, 70);
+    g.fillStyle = '#1f4fa3'; g.font = '600 58px Arial, sans-serif'; g.fillText('AN DUONG', 128, 128);
+    g.font = '500 24px Arial, sans-serif'; g.fillText('DESIGN + CONSTRUCTION', 130, 172);
+    g.fillStyle = '#ffffff'; g.font = '600 38px Arial, sans-serif'; g.fillText('BIỂN BÁO CÔNG TRÌNH', w * .52, 70);
+    g.globalAlpha = .7; for (let i = 0; i < 5; i++) g.fillRect(w * .52, 100 + i * 28, (.3 + rnd() * .14) * w, 8);
+    g.globalAlpha = 1;
+  }, 1, 1),
+  // Blue safety net over scaffolding, as on ADDC sites.
+  net: () => tex(128, 128, (g, w, h) => {
+    g.fillStyle = 'rgba(28,70,170,.22)'; g.fillRect(0, 0, w, h);
+    g.strokeStyle = 'rgba(70,120,230,.55)'; g.lineWidth = 1;
+    for (let i = 0; i <= w; i += 8) { g.beginPath(); g.moveTo(i, 0); g.lineTo(i, h); g.stroke(); g.beginPath(); g.moveTo(0, i); g.lineTo(w, i); g.stroke(); }
+  }),
+  hoarding: () => tex(128, 128, (g, w, h) => {
+    g.fillStyle = '#2d58b0'; g.fillRect(0, 0, w, h);
+    for (let x = 0; x < w; x += 16) { g.fillStyle = 'rgba(255,255,255,.12)'; g.fillRect(x, 0, 6, h); g.fillStyle = 'rgba(0,0,0,.15)'; g.fillRect(x + 10, 0, 4, h); }
   })
 };
 
@@ -162,8 +209,18 @@ function makeMats() {
     microcement: std({ map: T.microcement(), roughness: .7 }),
     paintCream: std({ map: T.plaster('#ece5d2'), roughness: .95 }),
     paintMoss: std({ map: T.plaster('#4f6a57'), roughness: .95 }),
-    clay: std({ color: '#f1ece0', roughness: .9 })
+    clay: std({ color: '#f1ece0', roughness: .9 }),
+    terrazzo: std({ map: T.terrazzo(), roughness: .35 }),
+    encaustic: std({ map: T.encaustic(), roughness: .55 }),
+    pressRed: std({ color: '#a8432c', metalness: .5, roughness: .55 }),
+    weight: std({ color: '#7d5a3c', roughness: .95 }),
+    spunPile: std({ color: '#a9a69e', roughness: .85 }),
+    tube: std({ color: '#9aa0a4', metalness: .7, roughness: .4 }),
+    net: std({ map: T.net(), transparent: true, depthWrite: false, side: THREE.DoubleSide, roughness: 1 }),
+    hoarding: std({ map: T.hoarding(), roughness: .6, metalness: .2 }),
+    siteBoard: std({ map: T.siteBoard(), roughness: .8 })
   };
+  m.net.map.repeat.set(6, 3); m.hoarding.map.repeat.set(4, 1);
   m.marbleFloor = m.marble.clone(); m.marbleFloor.map = T.marble(); m.marbleFloor.map.repeat.set(2, 2);
   m.microcement.map.repeat.set(2, 2);
   m.floorWood.map.repeat.set(2, 2);
@@ -375,6 +432,15 @@ const SAMPLES = {
       block(p, H, d, M.alu, -W / 2 + p / 2, 0, 0), block(p, H, d, M.alu, W / 2 - p / 2, 0, 0), block(p * .7, H, d, M.alu, 0, 0, 0));
     g.add(block(W - p * 2, H - p * 2, .02, M.glass, 0, p, 0));
     g.add(block(.5, .5, .5, M.concrete, .45, 0, -.7));
+    return g;
+  },
+  terrazzo: M => {
+    const g = new THREE.Group();
+    const slab = mesh(new RoundedBoxGeometry(1.8, .06, 1.1, 2, .012), M.terrazzo, 0, .03, 0); slab.rotation.y = .3; g.add(slab);
+    const top = mesh(new RoundedBoxGeometry(1.2, .05, .7, 2, .012), M.terrazzo, -.15, .55, -.25); top.rotation.set(-.95, .3, 0); g.add(top);
+    const s = .4, gap = .015;
+    [[0, 0], [1, 0], [0, 1], [1, 1]].forEach(([i, j]) => g.add(block(s, .03, s, M.encaustic, .55 + i * (s + gap), .06, .2 + j * (s + gap))));
+    const lifted = block(s, .03, s, M.encaustic, .1, .32, .75); lifted.rotation.set(-.4, -.3, .1); g.add(lifted);
     return g;
   }
 };
@@ -814,12 +880,45 @@ function buildHouse(M) {
   });
   for (let f = 0; f < FLOORS; f++) add(block(f ? 4.5 : 2.3, f ? H - 1.4 : 2.8, .02, M.warm, f ? -.3 : .6, lvl(f) + (f ? 1.05 : 0), D / 2 - .3), 6, .7 + f * .08, 'pop');
 
+  // Temporary works seen on ADDC sites, removed before handover:
+  // pile press with stacked counterweight blocks and spun piles (phase 0), blue hoarding with site board, blue-net scaffolding.
+  const temp = (obj, phase, t, until, mode = 'grow') => { add(obj, phase, t, mode); parts[parts.length - 1].until = until; return obj; };
+  const press = new THREE.Group();
+  press.add(block(2.8, .28, 1.5, M.pressRed, 0, 0, 0));
+  [-.38, .38].forEach(x => press.add(block(.2, 5.6, .2, M.pressRed, x, .28, 0)));
+  press.add(block(1, .3, .5, M.pressRed, 0, 5.6, 0), block(.9, .5, .6, M.pressRed, 0, 3.2, 0));
+  press.add(mesh(new THREE.CylinderGeometry(.15, .15, 3.6, 14).translate(0, 1.8, 0), M.spunPile, 0, .2, 0));
+  [-1.05, 1.05].forEach(x => { for (let r = 0; r < 5; r++) press.add(block(.62, .4, 1.4, M.weight, x + (r % 2 ? .03 : -.03), .28 + r * .41, 0)); });
+  press.position.set(-1.6, 0, -1.2);
+  temp(press, 0, 0, 1.45);
+  const pileStack = new THREE.Group();
+  [[0, 0], [.32, 0], [.64, 0], [.16, .28], [.48, .28]].forEach(([x, y]) => { const c = mesh(new THREE.CylinderGeometry(.15, .15, 4.2, 14), M.spunPile, x, .15 + y, 0); c.rotation.x = Math.PI / 2; pileStack.add(c); });
+  pileStack.position.set(4.3, 0, 1);
+  temp(pileStack, 0, .1, .9, 'pop');
+  const gate = new THREE.Group(), fz = D / 2 + 3.6;
+  [[-3.25, 3.7], [3.25, 3.7]].forEach(([x, w]) => gate.add(block(w, 2.2, .06, M.hoarding, x, 0, 0)));
+  [-1.4, 1.4].forEach(x => gate.add(block(.14, 3.3, .14, M.tube, x, 0, 0)));
+  gate.add(block(3.6, .9, .08, M.siteBoard, 0, 3.0, 0));
+  gate.position.set(0, 0, fz);
+  temp(gate, 0, .05, 6.05);
+  for (let f = 0; f < FLOORS + 1; f++) {
+    const sc = new THREE.Group(), y = lvl(f), hh = f < FLOORS ? H : 1.4, z0 = D / 2 + .55, z1 = D / 2 + 1.25;
+    for (let i = 0; i < 7; i++) [z0, z1].forEach(z => sc.add(block(.05, hh, .05, M.tube, -3.6 + i * 1.2, 0, z)));
+    [hh * .5, hh - .05].forEach(yy => [z0, z1].forEach(z => sc.add(block(7.3, .05, .05, M.tube, 0, yy, z))));
+    sc.add(block(7.4, .04, .75, M.oak, 0, hh - .1, (z0 + z1) / 2));
+    sc.add(block(7.5, hh, .02, M.net, 0, 0, z1 + .04));
+    sc.traverse(o => { if (o.isMesh) o.castShadow = false; });
+    sc.position.y = y;
+    temp(sc, 2, f / FLOORS * .95, 5.55);
+  }
+
   return { group: g, parts };
 }
 
 function applyParts(parts, pf) {
   parts.forEach(p => {
-    const a = clamp((pf - p.phase - p.t * .7) / .3, 0, 1);
+    // Temporary works (`until`) shrink away again once their phase is over.
+    const a = Math.min(clamp((pf - p.phase - p.t * .7) / .3, 0, 1), p.until === undefined ? 1 : clamp((p.until - pf) / .3, 0, 1));
     const o = p.obj;
     o.visible = a > 0;
     if (!o.visible) return;

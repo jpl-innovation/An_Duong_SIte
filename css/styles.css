@@ -896,3 +896,33 @@ main, .footer { will-change: transform; }
 .scope-lead { max-width: 720px; font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.6; color: var(--ink-2); margin-bottom: clamp(48px, 7vw, 96px); }
 .modal-grid img:last-child:nth-child(odd) { grid-column: span 2; aspect-ratio: 16 / 9; }
 .partner-grid img { mix-blend-mode: normal; opacity: 1; filter: grayscale(1); }
+
+/* ---------- Site log (Nhật ký công trường) ---------- */
+.log-title { margin-bottom: clamp(40px, 6vw, 80px); }
+.log { list-style: none; border-bottom: 1px solid var(--line); }
+.log-year { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); padding: 32px 0 12px; }
+.log-row {
+  display: grid; grid-template-columns: 120px 1fr 220px 112px; gap: 24px; align-items: center;
+  width: 100%; text-align: left; border-top: 1px solid var(--line); padding: 16px 0; color: inherit;
+}
+.log-date { font-size: 13px; font-variant-numeric: tabular-nums; color: var(--muted); }
+.log-text { font-size: clamp(1rem, 1.35vw, 1.2rem); line-height: 1.4; letter-spacing: -0.01em; }
+.log-place { font-size: 13px; color: var(--ink-2); }
+.log-thumb { width: 112px; aspect-ratio: 4 / 3; object-fit: cover; background: var(--bone-2); }
+button.log-row { cursor: pointer; }
+button.log-row .log-text { transition: color .3s; }
+button.log-row .log-text::after { content: ' →'; color: var(--accent); }
+button.log-row:hover .log-text, button.log-row:focus-visible .log-text { color: var(--accent); }
+.is-scrolling .log-row { pointer-events: none; }
+@media (max-width: 720px) {
+  .log-row { grid-template-columns: 1fr 88px; gap: 6px 16px; }
+  .log-date { grid-column: 1; }
+  .log-text { grid-column: 1; }
+  .log-place { grid-column: 1; }
+  .log-thumb { grid-column: 2; grid-row: 1 / span 3; width: 88px; }
+}
+.log-more { margin-top: 28px; font-size: 14px; }
+@media (min-width: 1025px) { .org-grid { grid-template-columns: repeat(2, 1fr); } }
+.price-update { margin-top: 24px; max-width: 820px; font-size: 14px; line-height: 1.65; color: var(--ink-2); }
+.price-update b { font-weight: 600; }
+.partner-note { margin-top: 28px; max-width: 820px; font-size: 14px; line-height: 1.6; color: var(--ink-2); }

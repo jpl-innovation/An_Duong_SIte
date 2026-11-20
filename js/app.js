@@ -5,7 +5,7 @@
 
 const PROJECTS = [
   { id: 'q12', title: 'Biệt thự vườn Quận 12', category: 'biet-thu', svc: ['thi-cong', 'noi-that'], type: 'Biệt thự', location: 'An Phú Đông, Quận 12, TP.HCM', service: 'Thi công xây dựng', featured: true,
-    image: 'img/bietthuq12-12.jpg', gallery: ['img/projects/bietthuq12-11.jpg', 'img/projects/bietthuq12-10.jpg', 'img/projects/bietthuq12-9.jpg', 'img/projects/bietthuq12-8.jpg', 'img/projects/bietthuq12-4.jpg', 'img/projects/bietthuq12-7.jpg', 'img/projects/bietthuq12-5.jpg', 'img/projects/bietthuq12-6.jpg'],
+    image: 'img/fb/q12-extra/00.jpg', gallery: ['img/projects/bietthuq12-11.jpg', 'img/projects/bietthuq12-10.jpg', 'img/projects/bietthuq12-9.jpg', 'img/projects/bietthuq12-8.jpg', 'img/projects/bietthuq12-4.jpg', 'img/projects/bietthuq12-7.jpg', 'img/projects/bietthuq12-5.jpg', 'img/projects/bietthuq12-6.jpg', 'img/fb/q12-extra/01.jpg', 'img/fb/q12-extra/02.jpg', 'img/fb/q12-extra/03.jpg'],
     facts: [['Thiết kế', 'AN Design + Build'], ['Thi công', 'Kiến Trúc An Dương'], ['Quy mô', '1.000 m² xây dựng, 2 tầng, mái BTCT'], ['Thời gian', '05/2019 đến 11/2019']],
     text: 'Villa A, biệt thự vườn hai tầng với hồ bơi, giàn pergola và mặt kính lớn mở ra sân vườn. Hình ảnh ghi lại từ lúc đổ móng, dựng mái đến khi hoàn thiện nội thất phòng ngủ và phòng tắm.' },
   { id: 'travinh', title: 'Trà Vinh Casa', category: 'biet-thu', svc: ['kien-truc', 'thi-cong'], type: 'Biệt thự', location: 'Phường 1, TP. Trà Vinh', service: 'Thiết kế, xây dựng trọn gói', featured: true,
@@ -35,8 +35,112 @@ const PROJECTS = [
     text: 'Từ phác thảo phối cảnh mặt tiền đến mặt bằng tầng 1 và tầng 2 có kích thước, bước khởi đầu của bộ hồ sơ kiến trúc.' },
   { id: 'steam', title: 'Trung tâm STEAM', category: 'noi-that', svc: ['kien-truc', 'noi-that'], type: 'Giáo dục', location: '', service: 'Thiết kế kiến trúc, nội thất',
     image: 'img/steam.jpg', gallery: [{ src: 'img/projects/steam2.jpg', fit: 'contain' }, { src: 'img/projects/steam3.jpg', fit: 'contain' }, { src: 'img/projects/steam4.jpg', fit: 'contain' }, { src: 'img/projects/steam5.jpg', fit: 'contain' }],
-    text: 'Thiết kế kiến trúc và nội thất cho trung tâm giáo dục STEAM: mô hình 3D bố trí lớp học, khu tiếp đón, phòng thí nghiệm vách kính và mặt tiền cong.' }
+    text: 'Thiết kế kiến trúc và nội thất cho trung tâm giáo dục STEAM: mô hình 3D bố trí lớp học, khu tiếp đón, phòng thí nghiệm vách kính và mặt tiền cong.' },
+  { id: 'lelinh', title: 'Showroom Le Linh Fashion', category: 'khac', svc: ['thi-cong'], type: 'Showroom', location: 'An Nhơn, TP.HCM', service: 'Thi công xây dựng',
+    image: 'img/fb/lelinh/01.jpg', gallery: ['img/fb/lelinh/02.jpg', 'img/fb/lelinh/03.jpg', 'img/fb/lelinh/04.jpg'],
+    facts: [['Thiết kế, quản lý dự án', 'AN Partners'], ['Thi công', 'Kiến Trúc An Dương'], ['Giấy phép xây dựng', 'Cấp ngày 22/08/2026'], ['Tình trạng', 'Đang thi công, cập nhật 11/2026']],
+    text: 'Tòa nhà showroom cho thương hiệu thời trang Le Linh: mặt tiền trắng, cửa vòm, ban công sắt và đèn hắt theo từng tầng. ADDC nhận thi công từ tháng 07/2026; ảnh tháng 11/2026 ghi lại giai đoạn thi công phần thô.' },
+  { id: 'ankhanh', title: 'Biệt thự 5 tầng An Khánh', category: 'biet-thu', svc: ['thi-cong'], type: 'Biệt thự', location: 'An Khánh, TP.HCM', service: 'Thi công xây dựng',
+    image: 'img/fb/ankhanh/01.jpg', gallery: ['img/fb/ankhanh/02.jpg', 'img/fb/ankhanh/03.jpg', 'img/fb/ankhanh/04.jpg', 'img/fb/ankhanh/05.jpg', 'img/fb/ankhanh/06.jpg'],
+    facts: [['Thiết kế', 'AN Partners'], ['Thi công', 'Kiến Trúc An Dương'], ['Quy mô', '1 tầng hầm, 4 tầng nổi, khu đất 7 x 20 m'], ['Khởi công', '03/11/2026'], ['Tình trạng', 'Đang thi công phần móng']],
+    text: 'Biệt thự một tầng hầm và bốn tầng nổi do AN Partners tư vấn thiết kế, ADDC là nhà thầu thi công. Lễ động thổ tháng 04/2026; ngày 03/11/2026 công trường tập kết tải và bắt đầu ép cọc móng.' },
+  { id: 'hotram', title: 'Villa Hồ Tràm', category: 'biet-thu', svc: ['thi-cong', 'noi-that'], type: 'Biệt thự', location: 'Hồ Tràm, Bà Rịa - Vũng Tàu', service: 'Thi công hoàn thiện', featured: true,
+    image: 'img/fb/hotram/01.jpg', gallery: ['img/fb/hotram/02.jpg', 'img/fb/hotram/03.jpg', 'img/fb/hotram/04.jpg', 'img/fb/hotram/05.jpg', 'img/fb/hotram/06.jpg', 'img/fb/hotram/07.jpg', 'img/fb/hotram/08.jpg', 'img/fb/hotram/09.jpg'],
+    facts: [['Thiết kế', 'Kiến trúc sư đối tác'], ['Thi công hoàn thiện', 'Kiến Trúc An Dương'], ['Bàn giao', '08/2025']],
+    text: 'Thi công hoàn thiện biệt thự nghỉ dưỡng với bảng màu đậm: tường xanh rêu, cam đất và vàng nghệ, tủ bếp xanh lá, gạch bông, cầu thang gỗ và khung cửa sắt cao hai tầng. Ảnh chụp lúc bàn giao, tháng 08/2025.' },
+  { id: 'sunwah', title: 'Căn hộ Sunwah Pearl', category: 'noi-that', svc: ['noi-that'], type: 'Căn hộ', location: 'Bình Thạnh, TP.HCM', service: 'Thi công nội thất (fit-out)',
+    image: 'img/fb/sunwah/01.jpg', gallery: ['img/fb/sunwah/02.jpg', 'img/fb/sunwah/03.jpg', 'img/fb/sunwah/04.jpg', 'img/fb/sunwah/05.jpg', 'img/fb/sunwah/06.jpg', { src: 'img/fb/sunwah/07.jpg', fit: 'contain' }, 'img/fb/sunwah/08.jpg'],
+    facts: [['Thiết kế', 'Librazzi'], ['Thi công', 'Kiến Trúc An Dương'], ['Khởi công', '28/09/2023']],
+    text: 'Thi công fit-out căn hộ cao cấp theo thiết kế của Librazzi: hệ tủ âm tường gỗ sáng, bếp ốp gạch xanh, phòng tắm terrazzo với vách kính và góc giặt sấy âm tủ. Kèm mặt bằng bố trí nội thất và ảnh hiện trạng ngày khởi công.' },
+  { id: 'q3-4t', title: 'Nhà ở 4 tầng Quận 3', category: 'nha-pho', svc: ['thi-cong'], type: 'Nhà phố', location: 'Quận 3, TP.HCM', service: 'Thi công xây dựng',
+    image: 'img/fb/q3-4t/01.jpg', gallery: ['img/fb/q3-4t/02.jpg', 'img/fb/q3-4t/03.jpg', 'img/fb/q3-4t/04.jpg', 'img/fb/q3-4t/05.jpg', 'img/fb/q3-4t/06.jpg', 'img/fb/q3-4t/07.jpg'],
+    facts: [['Thiết kế', 'Không Gian Xanh'], ['Thi công', 'Kiến Trúc An Dương'], ['Khởi công', '23/09/2023']],
+    text: 'Nhà ở bốn tầng mặt tiền trắng với ô cửa vòm và tầng trệt ốp đá. Phối cảnh phòng ngủ, bếp và góc làm việc do đơn vị thiết kế lập; ADDC thi công từ lễ động thổ tháng 09/2023.' },
+  { id: 'agribank', title: 'Văn phòng Agribank', category: 'van-phong', svc: ['noi-that'], type: 'Văn phòng', location: '', service: 'Thi công nội thất',
+    image: 'img/fb/agribank/01.jpg', gallery: ['img/fb/agribank/02.jpg', 'img/fb/agribank/03.jpg', 'img/fb/agribank/04.jpg', 'img/fb/agribank/05.jpg'],
+    facts: [['Thi công', 'Kiến Trúc An Dương'], ['Hoàn thành', '09/2023']],
+    text: 'Ốp vách gỗ, cửa và tủ âm tường cho phòng làm việc tại một trụ sở Agribank. Ảnh chụp trong lúc lắp đặt và khi hoàn thành, tháng 09/2023.' },
+  { id: 'mia', title: 'Tòa nhà văn phòng 6 tầng Quận 3', category: 'van-phong', svc: ['thi-cong'], type: 'Văn phòng', location: 'Quận 3, TP.HCM', service: 'Thi công xây dựng',
+    image: 'img/fb/mia/01.jpg', gallery: ['img/fb/mia/02.jpg', 'img/fb/mia/03.jpg', 'img/fb/mia/04.jpg'],
+    facts: [['Thi công', 'Kiến Trúc An Dương'], ['Quy mô', '6 tầng'], ['Hoàn thành phần khung', '05/2023']],
+    text: 'Tòa nhà văn phòng làm việc sáu tầng của Công ty MIA, mặt tiền trắng với khe đứng trồng cây. Tháng 05/2023 công trình hoàn thành phần khung và chuyển sang hoàn thiện.' },
+  { id: 'nhapho2022', title: 'Nhà phố trọn gói 2022', category: 'nha-pho', svc: ['thi-cong', 'noi-that'], type: 'Nhà phố', location: 'TP.HCM', service: 'Phần thô đến nội thất', featured: true,
+    image: 'img/fb/nhapho2022/01.jpg', gallery: ['img/fb/nhapho2022/02.jpg', 'img/fb/nhapho2022/03.jpg', 'img/fb/nhapho2022/04.jpg', 'img/fb/nhapho2022/05.jpg', 'img/fb/nhapho2022/06.jpg', 'img/fb/nhapho2022/07.jpg', 'img/fb/nhapho2022/08.jpg', 'img/fb/nhapho2022/09.jpg', 'img/fb/nhapho2022/10.jpg', 'img/fb/nhapho2022/11.jpg', 'img/fb/nhapho2022/12.jpg'],
+    facts: [['Thi công', 'Kiến Trúc An Dương, phần thô đến nội thất'], ['Bàn giao', '11/2022'], ['Ảnh hoàn thiện', 'LiloStudio']],
+    text: 'Các đội phần thô, hoàn thiện và nội thất của ADDC cùng làm từ móng đến khi gia đình trẻ nhận nhà: bếp chữ I tông xám, cầu thang gỗ, phòng ngủ trẻ em với tủ vòm xanh và phòng tắm gạch thẻ. Kèm ảnh mặt tiền và giai đoạn phần thô.' },
+  { id: 'daugiay', title: 'Nhà ở kết hợp café Dầu Giây', category: 'khac', svc: ['thi-cong'], type: 'Nhà ở, café', location: 'Dầu Giây, Thống Nhất, Đồng Nai', service: 'Thi công xây dựng',
+    image: 'img/fb/daugiay/01.jpg', gallery: ['img/fb/daugiay/02.jpg', 'img/fb/daugiay/03.jpg', 'img/fb/daugiay/04.jpg', 'img/fb/daugiay/05.jpg', 'img/fb/daugiay/06.jpg'],
+    facts: [['Thi công', 'Kiến Trúc An Dương'], ['Động thổ', '03/03/2022'], ['Hoàn thành móng', '17/03/2022']],
+    text: 'Nhà ở kết hợp quán café tại thị trấn Dầu Giây. Lễ động thổ ngày 03/03/2022; hai tuần sau công trường hoàn thành móng và đổ bê tông sàn tầng trệt.' },
+  { id: 'pvb', title: 'Pham Van Bach House', category: 'noi-that', svc: ['noi-that'], type: 'Nhà ở', location: 'Đường Phạm Văn Bạch, TP.HCM', service: 'Thiết kế nội thất',
+    image: 'img/fb/pvb/01.jpg', gallery: ['img/fb/pvb/02.jpg', 'img/fb/pvb/03.jpg', 'img/fb/pvb/04.jpg', 'img/fb/pvb/05.jpg', 'img/fb/pvb/06.jpg', 'img/fb/pvb/07.jpg'],
+    facts: [['Thiết kế', 'Đội thiết kế ADDC'], ['Công bố phương án', '02/2022']],
+    text: 'Phương án nội thất do đội thiết kế ADDC thực hiện: gỗ sồi sáng, sàn xương cá, bàn ăn mặt terrazzo và tường be ấm. Phối cảnh phòng khách, bếp ăn và phòng ngủ.' },
+  { id: 'psd', title: 'Văn phòng PSD, tòa nhà PetroVietnam', category: 'van-phong', svc: ['noi-that'], type: 'Văn phòng', location: 'Tòa nhà PetroVietnam, TP.HCM', service: 'Thi công nội thất cùng AZ Decor', featured: true,
+    image: 'img/fb/psd/01.jpg', gallery: ['img/fb/psd/02.jpg', 'img/fb/psd/03.jpg', 'img/fb/psd/04.jpg', 'img/fb/psd/05.jpg', 'img/fb/psd/06.jpg', 'img/fb/psd/07.jpg'],
+    facts: [['Thực hiện', 'Đội nội thất ADDC và AZ Decor'], ['Bàn giao', '02/2022']],
+    text: 'Văn phòng mở với phòng họp dài, phòng làm việc vách kính, quầy lễ tân kim loại xước và tường chữ theo nhận diện của PSD. Đội nội thất ADDC cùng AZ Decor hoàn thành và bàn giao tháng 02/2022.' },
+  { id: 'tanbinh', title: 'Nhà phố 1 hầm, 5 tầng Tân Bình', category: 'nha-pho', svc: ['kien-truc', 'thi-cong'], type: 'Nhà phố', location: 'Tân Bình, TP.HCM', service: 'Thiết kế và thi công',
+    image: 'img/fb/tanbinh/01.jpg', gallery: ['img/fb/tanbinh/02.jpg', 'img/fb/tanbinh/03.jpg', { src: 'img/fb/tanbinh/04.jpg', fit: 'contain' }, 'img/fb/tanbinh/05.jpg', 'img/fb/tanbinh/06.jpg', 'img/fb/tanbinh/07.jpg', 'img/fb/tanbinh/08.jpg'],
+    facts: [['Thiết kế', 'Kiến Trúc An Dương'], ['Thi công', 'Kiến Trúc An Dương'], ['Quy mô', '1 tầng hầm, 5 tầng nổi'], ['Ký hợp đồng', '11/2021'], ['Ép cọc', '12/2021']],
+    text: 'Nhà phố có tầng hầm để xe, sân thượng lam gỗ và cây xanh trên từng tầng. Hồ sơ kiến trúc mang khung tên Công ty TNHH Kiến Trúc An Dương; tháng 12/2021 công trường khoan dẫn và ép cọc BTCT cho phần móng.' }
 ];
+
+/* Nhật ký công trường: ngày đăng bài trên Facebook của AN DUONG DC và KTS. Văn Văn Phú. */
+const LOG = [
+  ['18.11.2026', 'Showroom Le Linh Fashion đang thi công phần thô', 'An Nhơn, TP.HCM', 'img/fb/lelinh/03.jpg', 'lelinh'],
+  ['03.11.2026', 'Khởi công biệt thự 1 hầm, 4 tầng nổi trên khu đất 7 x 20 m, bắt đầu ép cọc', 'An Khánh, TP.HCM', 'img/fb/ankhanh/03.jpg', 'ankhanh'],
+  ['21.09.2026', 'Dựng biển báo công trình showroom Le Linh, giấy phép xây dựng cấp ngày 22/08/2026', 'An Nhơn, TP.HCM', 'img/fb/lelinh/02.jpg', 'lelinh'],
+  ['22.07.2026', 'Nhận thi công showroom mới cho thương hiệu Le Linh Fashion', 'An Nhơn, TP.HCM', 'img/fb/lelinh/01.jpg', 'lelinh'],
+  ['02.04.2026', 'Động thổ dự án do AN Partners tư vấn thiết kế, ADDC là nhà thầu thi công', 'An Khánh, TP.HCM', 'img/fb/ankhanh/01.jpg', 'ankhanh'],
+  ['14.03.2026', 'Khởi công nhà ở gia đình, gói thiết kế và thi công cùng AN Partners', 'An Lạc, TP.HCM', 'img/fb/anlac/01.jpg'],
+  ['26.02.2026', 'Khởi công hoàn thiện căn hộ dịch vụ cho thuê', '', 'img/fb/log/01.jpg'],
+  ['08.11.2025', 'Hoàn thành sàn mái công trình Quận 2', 'Quận 2, TP.HCM', 'img/fb/log/02.jpg'],
+  ['25.08.2025', 'Bàn giao thi công hoàn thiện Villa Hồ Tràm', 'Hồ Tràm, Bà Rịa - Vũng Tàu', 'img/fb/hotram/01.jpg', 'hotram'],
+  ['19.07.2025', 'Lễ khởi công nhà ở, gói thiết kế và thi công cùng AN Partners', 'Cát Lái, TP.HCM', 'img/fb/log/03.jpg'],
+  ['23.05.2024', 'Nghiệm thu nội bộ cốt thép, chuẩn bị đổ bê tông sàn tầng 2 nhà phố', 'Tân Phú, TP.HCM', 'img/fb/log/04.jpg'],
+  ['06.05.2024', 'Khởi công xây mới và cải tạo nhà ở 3 tầng', 'Quận 3, TP.HCM', 'img/fb/log/09.jpg'],
+  ['18.04.2024', 'Phối cảnh nội thất bếp và phòng ngủ cho nhà phố cải tạo', '', 'img/fb/log/08.jpg'],
+  ['17.04.2024', 'Tháo dỡ hiện trạng, chuẩn bị cải tạo nhà phố', '', 'img/fb/log/07.jpg'],
+  ['12.04.2024', 'Động thổ tòa nhà văn phòng kết hợp nhà ở 8 tầng', 'Quận 6, TP.HCM', 'img/fb/log/05.jpg'],
+  ['16.03.2024', 'Ký hợp đồng xây dựng đầu tiên của năm 2024', '', 'img/fb/log/06.jpg'],
+  ['30.09.2023', 'Hoàn thành ốp gỗ nội thất văn phòng Agribank', '', 'img/fb/agribank/01.jpg', 'agribank'],
+  ['28.09.2023', 'Động thổ thi công fit-out căn hộ Sunwah Pearl, thiết kế Librazzi', 'Bình Thạnh, TP.HCM', 'img/fb/sunwah/08.jpg', 'sunwah'],
+  ['23.09.2023', 'Động thổ nhà ở 4 tầng, thiết kế Không Gian Xanh', 'Quận 3, TP.HCM', 'img/fb/q3-4t/01.jpg', 'q3-4t'],
+  ['13.05.2023', 'Hoàn thành phần khung tòa nhà văn phòng 6 tầng Công ty MIA', 'Quận 3, TP.HCM', 'img/fb/mia/03.jpg', 'mia'],
+  ['06.02.2023', 'Khai trương đầu năm 2023 tại văn phòng ADDC', 'Bình Thạnh, TP.HCM', 'img/fb/log/10.jpg'],
+  ['09.11.2022', 'Bàn giao nhà phố trọn gói, từ phần thô đến nội thất', 'TP.HCM', 'img/fb/nhapho2022/01.jpg', 'nhapho2022'],
+  ['15.09.2022', 'Chuẩn bị khởi công công trình mới', 'TP. Thủ Đức', 'img/fb/log/11.jpg'],
+  ['27.07.2022', 'Hoàn thiện và bàn giao nhà phố', '', 'img/fb/log/12.jpg'],
+  ['23.04.2022', 'Ép cọc hai căn nhà phố liền kề', '', 'img/fb/log/13.jpg'],
+  ['17.04.2022', 'Động thổ hai căn nhà phố liền kề, quy mô 4 tầng', '', 'img/fb/log/14.jpg'],
+  ['17.03.2022', 'Hoàn thành móng, đổ bê tông sàn tầng trệt', 'Thống Nhất, Đồng Nai', 'img/fb/daugiay/03.jpg', 'daugiay'],
+  ['08.03.2022', 'Đổ bê tông sàn tầng 3', '', 'img/fb/log/15.jpg'],
+  ['03.03.2022', 'Động thổ nhà ở kết hợp café', 'Dầu Giây, Đồng Nai', 'img/fb/daugiay/01.jpg', 'daugiay'],
+  ['28.02.2022', 'Công bố phương án nội thất Pham Van Bach House', 'TP.HCM', 'img/fb/pvb/01.jpg', 'pvb'],
+  ['24.02.2022', 'Công bố báo giá xây dựng năm 2022: xây thô nhà phố từ 3,3 triệu đ/m², trọn gói từ 5,5 triệu đ/m²', 'Áp dụng mọi tỉnh thành', ''],
+  ['23.02.2022', 'Đội nội thất ADDC và AZ Decor bàn giao văn phòng PSD', 'Tòa nhà PetroVietnam', 'img/fb/psd/01.jpg', 'psd'],
+  ['08.02.2022', 'Khai trương năm Nhâm Dần', 'Bình Thạnh, TP.HCM', 'img/fb/log/16.jpg'],
+  ['14.01.2022', 'Ký hợp đồng hợp khối hai nhà xưởng kết hợp văn phòng, nhà ở: 4 tầng, 900 m² xây dựng', '', 'img/fb/log/17.jpg'],
+  ['29.12.2021', 'Đổ bê tông vách tầng hầm cuối cùng của năm 2021', '', 'img/fb/log/18.jpg'],
+  ['13.12.2021', 'Khoan dẫn, ép cọc BTCT nhà phố 1 hầm, 5 tầng nổi', 'Tân Bình, TP.HCM', 'img/fb/log/19.jpg', 'tanbinh'],
+  ['23.12.2021', 'Công bố chứng chỉ năng lực hoạt động xây dựng số HCM-00059203, Sở Xây dựng TP.HCM cấp ngày 29/11/2021', '', 'img/fb/log/20.jpg'],
+  ['05.11.2021', 'Ký hợp đồng, hoàn thiện hồ sơ thiết kế nhà phố 1 hầm, 5 tầng', 'Tân Bình, TP.HCM', 'img/fb/tanbinh/01.jpg', 'tanbinh'],
+  ['14.10.2021', 'Đổ bê tông sàn ban đêm', '', 'img/fb/log/21.jpg'],
+  ['30.09.2021', 'Thông báo các công trình ADDC tại TP.HCM hoạt động trở lại từ 01/10/2021, sau giãn cách', 'TP.HCM', 'img/fb/extra/04.jpg']
+];
+function renderLog() {
+  const list = $('#siteLog');
+  if (!list) return;
+  let year = '';
+  list.innerHTML = LOG.map(([d, t, where, img, id]) => {
+    const y = d.slice(-4), head = y !== year ? `<li class="log-year">${(year = y)}</li>` : '';
+    const tag = id ? 'button' : 'div', attrs = id ? ` data-id="${id}" aria-haspopup="dialog"` : '';
+    return `${head}<li><${tag} class="log-row"${attrs}><span class="log-date">${d}</span><span class="log-text">${t}</span><span class="log-place">${where}</span>${img ? `<img class="log-thumb" src="${img}" alt="" loading="lazy" decoding="async" />` : '<span class="log-thumb"></span>'}</${tag}></li>`;
+  }).join('');
+  $$('button.log-row', list).forEach(b => b.addEventListener('click', () => openModal(b.dataset.id, b)));
+}
+
 
 /* Bảng giá addc.vn (2021), chưa gồm VAT 10%. */
 const PRICING = {
@@ -271,9 +375,23 @@ const GALLERY_EXTRA = {
     { image: 'img/equipment/ep-coc.jpg', title: 'Giàn ép cọc 80 đến 120 tấn', location: 'Thiết bị ADDC', service: 'Phần ngầm' },
     { image: 'img/equipment/cu-vay.jpg', title: 'Cừ vây thi công tầng hầm', location: 'Thiết bị ADDC', service: 'Phần ngầm' },
     { image: 'img/phunhuan1.jpg', title: 'Ép cọc móng', location: 'Công trường ADDC', service: 'Phần ngầm' },
-    { image: 'img/160bloi-14.jpg', title: 'Biển nhà thầu ADDC', location: 'Bình Thạnh, TP.HCM', service: 'Thi công phần thô' }
+    { image: 'img/160bloi-14.jpg', title: 'Biển nhà thầu ADDC', location: 'Bình Thạnh, TP.HCM', service: 'Thi công phần thô' },
+    { image: 'img/fb/log/19.jpg', title: 'Khoan dẫn, ép cọc BTCT', location: 'Tân Bình, 12/2021', service: 'Phần ngầm' },
+    { image: 'img/fb/log/21.jpg', title: 'Đổ bê tông sàn ban đêm', location: 'TP.HCM, 10/2021', service: 'Phần thô' },
+    { image: 'img/fb/daugiay/04.jpg', title: 'Bơm bê tông sàn trệt', location: 'Dầu Giây, 03/2022', service: 'Phần thô' },
+    { image: 'img/fb/log/04.jpg', title: 'Nghiệm thu nội bộ cốt thép sàn', location: 'Tân Phú, 05/2024', service: 'Kiểm soát chất lượng' },
+    { image: 'img/fb/mia/02.jpg', title: 'Giàn giáo, lưới che bảo hộ', location: 'Quận 3, 05/2023', service: 'An toàn công trường' }
+  ],
+  'kien-truc': [
+    { image: 'img/fb/log/09.jpg', title: 'Nhà ở xây mới và cải tạo 3 tầng', location: 'Quận 3, TP.HCM', service: 'Phối cảnh, 04/2024' },
+    { image: 'img/fb/extra/01.jpg', title: 'Phương án cải tạo nhà phố', location: 'TP.HCM, 04/2024', service: 'Mô hình mặt tiền' },
+    { image: 'img/fb/log/05.jpg', title: 'Văn phòng kết hợp nhà ở 8 tầng', location: 'Quận 6, TP.HCM', service: 'Mô hình khung, 04/2024' },
+    { image: 'img/fb/log/17.jpg', title: 'Nhà xưởng kết hợp văn phòng, nhà ở', location: '4 tầng, 900 m² xây dựng', service: 'Mặt bằng tầng 1, 01/2022' }
   ],
   'noi-that': [
+    { image: 'img/fb/log/08.jpg', title: 'Bếp và bàn đảo', location: 'Nhà phố cải tạo, 04/2024', service: 'Phối cảnh nội thất' },
+    { image: 'img/fb/extra/02.jpg', title: 'Tủ áo, kệ âm tường', location: 'Nhà phố cải tạo, 04/2024', service: 'Phối cảnh nội thất' },
+    { image: 'img/fb/extra/03.jpg', title: 'Phòng ngủ, hệ tủ gỗ', location: 'Nhà phố cải tạo, 04/2024', service: 'Phối cảnh nội thất' },
     { image: 'img/projects/bietthu-q7-5.jpg', title: 'Phòng thay đồ', location: 'Biệt thự Quận 7', service: 'Tủ áo, bàn trang điểm' },
     { image: 'img/projects/bietthu-q7-7.jpg', title: 'Tủ âm tường', location: 'Biệt thự Quận 7', service: 'Đồ gỗ theo kích thước' },
     { image: 'img/projects/bietthuq12-10.jpg', title: 'Phòng ngủ', location: 'Biệt thự vườn Quận 12', service: 'Hoàn thiện nội thất' },
@@ -297,7 +415,7 @@ function renderSlides() {
     el.setAttribute('role', 'button');
     el.setAttribute('aria-label', `Xem dự án ${p.title}`);
     el.innerHTML = `
-      <div class="slide-media"><img src="${p.image}" alt="${p.title}" loading="lazy" /></div>
+      <div class="slide-media"><img src="${p.image}" alt="${p.title}" loading="lazy" decoding="async" /></div>
       <div class="slide-info">
         <h3 class="slide-title">${pad2(i + 1)} · ${p.title}</h3>
         <div class="slide-meta">${p.location || p.type}<br />${p.service}</div>
@@ -398,7 +516,7 @@ function openModal(id, trigger) {
   const more = (p.gallery || []).map(g => typeof g === 'string' ? { src: g } : g);
   $('#modalBody').innerHTML = `
     <img class="modal-hero" src="${p.image}" alt="${p.title}" />
-    ${more.length ? `<div class="modal-grid">${more.map((g, i) => `<img class="${g.fit === 'contain' ? 'is-drawing' : ''}" src="${g.src}" alt="${p.title}, ảnh ${i + 2}" loading="lazy" />`).join('')}</div>` : ''}
+    ${more.length ? `<div class="modal-grid">${more.map((g, i) => `<img class="${g.fit === 'contain' ? 'is-drawing' : ''}" src="${g.src}" alt="${p.title}, ảnh ${i + 2}" loading="lazy" decoding="async" />`).join('')}</div>` : ''}
     <div class="modal-content">
       <span class="label">${p.type} · ADDC</span>
       <h3 class="modal-title">${p.title}</h3>
@@ -544,6 +662,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $$('[data-year]').forEach(e => { e.textContent = new Date().getFullYear(); });
   renderSlides();
   renderIndex();
+  renderLog();
   initFilters();
   initModal();
   initAccordion();

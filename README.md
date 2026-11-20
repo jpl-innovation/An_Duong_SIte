@@ -16,6 +16,7 @@ img/                  Logo (đổi màu theo bảng màu web), ảnh công trìn
 img/projects/         Ảnh từng dự án từ addc.vn
 img/equipment/        Ảnh thiết bị cắt từ Hồ sơ năng lực ADDC
 img/partners/         Logo đối tác từ addc.vn
+img/fb/<dự án>/       Ảnh từ Facebook AN DUONG DC và KTS. Văn Văn Phú, giữ nguyên chất lượng gốc; img/fb/log/ cho Nhật ký công trường (thi-cong.html, mảng LOG trong js/app.js)
 img/materials/        Ảnh vật liệu từ thư viện mở, nguồn trong CREDITS.md
 models/               Mô hình GLB dựng sẵn và ảnh tham chiếu, đầu vào cho raea
 docs/3D-PROMPTS.md    Lời nhắc cho raea và cách gắn mô hình mới vào web
@@ -25,3 +26,5 @@ tools/export-3d.html  Xuất lại các mô hình GLB sau khi sửa js/scene3d.j
 Sau khi sửa CSS hoặc JS, tăng số `?v=` trong các thẻ `<link>` và `<script>` của 5 trang để trình duyệt tải bản mới.
 
 Cần xác nhận trước khi đưa lên mạng: bảng giá là bản 2021; form liên hệ mở ứng dụng email (chưa có máy chủ nhận form); 6 thành viên chưa có ảnh chân dung đang hiển thị chữ viết tắt. Nội dung dự án, đội ngũ, sơ đồ tổ chức, thiết bị và đối tác lấy từ addc.vn và Hồ sơ năng lực ADDC.
+
+Nguồn của từng thông tin, ảnh và cách cập nhật dự án, nhật ký công trường: xem `CONTENT-SOURCES.md`.
